@@ -1,0 +1,120 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container-fluid  py-5 listing-page px-0">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+            <h1 class="text-center fw-bold mb-4"><%= listing.title %></h1>
+
+            <img src="<%= listing.image.url %>" alt="Listing Image" class="img-fluid w-100 rounded mb-4">
+
+            <p class="text-muted text-center fs-5">
+                <i class="bi bi-geo-alt"></i> <%= listing.location %>, <%= listing.country %>
+            </p>
+
+            <h3 class="text-success text-center fw-bold mb-4">
+                &#8377;<%= listing.price.toLocaleString("en-IN") %>
+            </h3>
+
+            <p class="fs-4 text-secondary text-justify px-md-5">
+                <%= listing.description %>
+            </p>
+
+            <!-- Owner Details -->
+            <div class="owner-details bg-white p-3 rounded shadow mb-4 text-center">
+                <h5 class="fw-bold">Owner Details</h5>
+                <p class="owner-info"><strong>Owner:</strong> <%= listing.owner.username %></p>
+                <p class="owner-info"><strong>Email:</strong> <%= listing.owner.email %></p>
+            </div>
+
+            <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <a href="/listings/<%= listing._id %>/edit" class="btn btn-lg btn-outline-primary px-4">
+                    <i class="bi bi-pencil-square"></i> Edit Listing
+                </a>
+                
+                <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+                    <button type="submit" class="btn btn-lg btn-outline-danger px-4">
+                        <i class="bi bi-trash"></i> Delete Listing
+                    </button>
+                </form>
+            </div>
+            <% } %>
+       <!-- review -->
+        <% if(currUser) {%>
+            <div class="mt-5 p-4 bg-white rounded shadow">
+                <h3 class="text-center fw-bold mb-3">Leave a Review</h3>
+                <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation" novalidate>
+                    
+                    <!-- ratings -->
+                    <div class="mb-3 text-center">
+                        <label class="form-label fw-bold">Rating:</label>
+                        <div class="rating">
+                            <input type="radio" name="review[rating]" value="5" id="star5">
+                            <label for="star5">&#9733;</label>
+                            <input type="radio" name="review[rating]" value="4" id="star4">
+                            <label for="star4">&#9733;</label>
+                            <input type="radio" name="review[rating]" value="3" id="star3">
+                            <label for="star3">&#9733;</label>
+                            <input type="radio" name="review[rating]" value="2" id="star2">
+                            <label for="star2">&#9733;</label>
+                            <input type="radio" name="review[rating]" value="1" id="star1" required>
+                            <label for="star1">&#9733;</label>
+                        </div>
+                        <div class="invalid-feedback">Please select a rating.</div>
+                    </div>
+
+                  <!-- comments -->
+                    <div class="mb-3">
+                        <label for="reviewText" class="form-label fw-bold">Your Review:</label>
+                        <textarea name="review[comment]" id="reviewText" class="form-control" rows="4" required placeholder="Write your review here..."></textarea>
+                        <div class="invalid-feedback">Please enter your review.</div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-lg px-4">Submit Review</button>
+                    </div>
+                </form>
+                <% } %>
+                
+                <!-- Show review -->
+                 <% if(listing.reviews.length >0) { %>
+
+                 <hr>
+                <div class="showReview container">
+                    <h4 class="text-center my-3">All Reviews</h4>
+                    <div class="row">
+                        <% for (review of listing.reviews) { %>
+                            <div class="col-md-4">
+                                <div class="review-card p-3">
+                                    <p class="card-title">@<%= review.author.username %></p>
+                                    <hr>
+                                    <p class="review-rating">
+                                        <% for (let i = 0; i < review.rating; i++) { %>
+                                            ⭐
+                                        <% } %>
+                                        <!-- (<%= review.rating %>/5) -->
+                                    </p>
+                                    <p class="review-comment"><%= review.comment %></p>
+                                   
+                                    <% if(currUser && currUser._id.equals(review.author._id)) { %>
+                                    <form class ="mb-3" method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=Delete">
+                                        <button class="btn btn-sm btn-dark">Delete</button>
+                                    </form>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+                <% } %>
+                
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
