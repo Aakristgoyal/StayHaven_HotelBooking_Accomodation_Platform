@@ -1,6 +1,6 @@
 # 🏡 StayHaven
 
-StayHaven is a modern **Hotel booking accomodation platform** for booking vacation rentals, short-term stays, and unique accommodations worldwide. Built with the **MERN stack** technologies, this full-stack project enables users to explore, list, and book properties seamlessly with a user-friendly interface.
+StayHaven is a modern **eCommerce platform** for booking vacation rentals, short-term stays, and unique accommodations worldwide. Built with the **MERN stack** technologies, this full-stack project enables users to explore, list, and book properties seamlessly with a user-friendly interface.
 
 ---
 
@@ -49,13 +49,11 @@ StayHaven was developed as a comprehensive solution to make finding and booking 
 
 ---
 
-
-
 ## 📬 Contact Me  
 For questions or collaborations, feel free to reach out:  
-- 📧 [deepak09012004@gmail.com](mailto:deepak09012004@gmail.com)  
-- 💼 [LinkedIn Profile](https://www.linkedin.com/in/deepak0901/)  
-  
+- 📧 [aakristgoyal2511@gmail.com](mailto:aakristgoyal2511@gmail.com)  
+- 💼 [LinkedIn Profile](www.linkedin.com/in/aakristgoyal)  
+
 ---
 
 > 🚀 StayHaven represents my journey into full-stack development and building real-world web applications with the MERN stack.
